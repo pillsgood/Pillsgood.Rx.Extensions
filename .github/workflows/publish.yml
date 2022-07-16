@@ -1,0 +1,41 @@
+name: publish to nuget
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  publish:
+    name: build, pack & publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+#      - name: Setup .NET
+#        uses: actions/setup-dotnet@v2
+#        with:
+#          dotnet-version: 6.0.x
+#      - name: Restore dependencies
+#        run: dotnet restore
+      - name: Set APP_VERSION using MinVer
+        run: |
+          dotnet tool install -g minver-cli -v q
+          APP_VERSION=`minver`
+          echo "Adding version to GITHUB_ENV: APP_VERSION=$APP_VERSION"
+          echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV  
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Publish
+        uses: brandedoutcast/publish-nuget@v2
+        with:
+            PROJECT_FILE_PATH: Pillsgood.Rx.Extensions/Pillsgood.Rx.Extensions.csproj
+            BUILD_CONFIGURATION: Release
+            VERSION_STATIC: ${{env.APP_VERSION}}
+            TAG_COMMIT: true
+            TAG_FORMAT: nuget_*
+            NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+            NUGET_SOURCE: https://api.nuget.org
+            INCLUDE_SYMBOLS: false
+            
+            
+            
