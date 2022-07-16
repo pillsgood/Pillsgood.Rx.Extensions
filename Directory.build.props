@@ -1,7 +1,6 @@
 <Project>
     <PropertyGroup>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageLicenseFile>License</PackageLicenseFile>
     </PropertyGroup>
 
     <ItemGroup>
