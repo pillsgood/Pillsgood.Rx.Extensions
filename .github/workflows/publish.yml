@@ -27,7 +27,7 @@ jobs:
             PROJECT_FILE_PATH: Pillsgood.Rx.Extensions/Pillsgood.Rx.Extensions.csproj
             VERSION_STATIC: ${{env.APP_VERSION}}
             TAG_COMMIT: true
-            TAG_FORMAT: *
+            TAG_FORMAT: v*
             NUGET_KEY: ${{secrets.NUGET_API_KEY}}
             NUGET_SOURCE: https://api.nuget.org
             INCLUDE_SYMBOLS: false
