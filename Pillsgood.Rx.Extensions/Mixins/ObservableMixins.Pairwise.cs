@@ -4,7 +4,7 @@ using Pillsgood.Rx.Extensions.Operators;
 // ReSharper disable once CheckNamespace
 namespace System;
 
-public static class ObservableMixinsPairwise
+public static partial class ObservableMixins
 {
     public static IObservable<TR> Pairwise<T, TR>(this IObservable<T> source, Func<Pair<T>, TR> selector)
     {
