@@ -26,7 +26,7 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Publish
-        uses: brandedoutcast/publish-nuget@v2
+        uses: alirezanet/publish-nuget@v3.0.4
         with:
             PROJECT_FILE_PATH: Pillsgood.Rx.Extensions/Pillsgood.Rx.Extensions.csproj
             VERSION_STATIC: ${{env.APP_VERSION}}
