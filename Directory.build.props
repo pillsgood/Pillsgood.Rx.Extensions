@@ -1,0 +1,10 @@
+<Project>
+    <PropertyGroup>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageLicenseFile>License</PackageLicenseFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)License" Pack="true" PackagePath="LICENSE"/>
+    </ItemGroup>
+</Project>
