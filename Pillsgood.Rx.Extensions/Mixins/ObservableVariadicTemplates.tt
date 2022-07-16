@@ -1,0 +1,153 @@
+<#@ template language="C#" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" #>
+<#@ import namespace="System.Linq" #>
+<#
+    const int variations = 10;
+#>
+using System.Reactive.Linq;
+
+// ReSharper disable once CheckNamespace
+namespace System;
+
+public static class ObservableVariadicMixins
+{
+<#
+    for (int i = 2; i <= variations; i++)
+    {
+        var generics = string.Join(", ", Enumerable.Range(1, i).Select(j => $"T{j}"));
+        var items = string.Join(", ", Enumerable.Range(1, i).Select(j => $"t.Item{j}"));
+#>
+    public static IDisposable Subscribe<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Action<<#= generics #>> onNext)
+    {
+        return source.Subscribe(t => onNext(<#= items #>));
+    }
+
+    public static IDisposable Subscribe<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Action<<#= generics #>> onNext,
+        Action<Exception> onError)
+    {
+        return source.Subscribe(t => onNext(<#= items #>), onError);
+    }
+
+    public static IDisposable Subscribe<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Action<<#= generics #>> onNext,
+        Action onComplete)
+    {
+        return source.Subscribe(t => onNext(<#= items #>), onComplete);
+    }
+
+    public static IDisposable Subscribe<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Action<<#= generics #>> onNext,
+        Action<Exception> onError,
+        Action onComplete)
+    {
+        return source.Subscribe(t => onNext(<#= items #>), onError, onComplete);
+    }
+
+    public static IDisposable Subscribe<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, Task> onNext)
+    {
+        return source.Subscribe(t => onNext(<#= items #>));
+    }
+
+    public static IDisposable Subscribe<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, Task> onNext,
+        Action<Exception> onError)
+    {
+        return source.Subscribe(t => onNext(<#= items #>), onError);
+    }
+
+    public static IDisposable Subscribe<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, Task> onNext,
+        Action onComplete)
+    {
+        return source.Subscribe(t => onNext(<#= items #>), onComplete);
+    }
+
+    public static IDisposable Subscribe<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, Task> onNext,
+        Action<Exception> onError,
+        Action onComplete)
+    {
+        return source.Subscribe(t => onNext(<#= items #>), onError, onComplete);
+    }
+
+    public static IDisposable SubscribeAsync<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, Task> onNext)
+    {
+        return source.SubscribeAsync(t => onNext(<#= items #>));
+    }
+
+    public static IDisposable SubscribeAsync<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, Task> onNext,
+        Action<Exception> onError)
+    {
+        return source.SubscribeAsync(t => onNext(<#= items #>), onError);
+    }
+
+    public static IDisposable SubscribeAsync<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, Task> onNext,
+        Action onComplete)
+    {
+        return source.SubscribeAsync(t => onNext(<#= items #>), onComplete);
+    }
+
+    public static IDisposable SubscribeAsync<<#= generics #>>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, Task> onNext,
+        Action<Exception> onError,
+        Action onComplete)
+    {
+        return source.SubscribeAsync(t => onNext(<#= items #>), onError, onComplete);
+    }
+
+    public static IObservable<TResult> Select<<#= generics #>, TResult>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, TResult> selector)
+    {
+        return source.Select(t => selector.Invoke(<#= items #>));
+    }
+
+    public static IObservable<TResult> SelectMany<<#= generics #>, TResult>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, IObservable<TResult>> selector)
+    {
+        return source.SelectMany(t => selector.Invoke(<#= items #>));
+    }
+
+    public static IObservable<TResult> SelectMany<<#= generics #>, TResult>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, Task<TResult>> selector)
+    {
+        return source.SelectMany(t => selector.Invoke(<#= items #>));
+    }
+
+    public static IObservable<TResult> SelectMany<<#= generics #>, TResult>(
+        this IObservable<(<#= generics #>)> source,
+        Func<<#= generics #>, IEnumerable<TResult>> selector)
+    {
+        return source.SelectMany(t => selector.Invoke(<#= items #>));
+    }
+<#
+        if (i != variations)
+        {
+            WriteLine("");
+        }
+#>
+<#
+    }
+#>
+}
