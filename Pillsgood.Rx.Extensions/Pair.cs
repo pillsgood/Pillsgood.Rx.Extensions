@@ -21,7 +21,7 @@ public readonly struct Pair<T> : IEquatable<Pair<T>>
         return h0;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return obj is Pair<T> pair && Equals(pair);
     }

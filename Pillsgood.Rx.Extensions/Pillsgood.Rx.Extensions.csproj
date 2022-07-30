@@ -3,16 +3,10 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <MinVerTagPrefix>v</MinVerTagPrefix>
-        <Configurations>Debug;Release;ReactiveUI</Configurations>
+        <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <MinVerTagPrefix>v</MinVerTagPrefix>
     </PropertyGroup>
-
-    <Target Name="AddPackageSpecificConstants" BeforeTargets="BeforeCompile">
-        <PropertyGroup>
-            <DefineConstants Condition="@(Reference-&gt;AnyHaveMetadataValue('NuGetPackageId','ReactiveUI'))">$(DefineConstants);REACTIVE_UI</DefineConstants>
-        </PropertyGroup>
-    </Target>
 
     <ItemGroup>
         <PackageReference Include="MinVer" Version="4.1.0">
