@@ -31,8 +31,8 @@ jobs:
       - name: Publish
         uses: alirezanet/publish-nuget@v3.0.4
         with:
-          PROJECT_FILE_PATH: Pillsgood.Rx.Extensions/Pillsgood.Rx.Extensions.csproj
-          VERSION_STATIC: ${{steps.version.outputs.version}}
+          PROJECT_FILE_PATH: ${{ matrix.projects }}
+          VERSION_STATIC: ${{ steps.version.outputs.version }}
           TAG_COMMIT: true
           TAG_FORMAT: v*
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
