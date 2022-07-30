@@ -7,6 +7,13 @@ jobs:
   publish:
     name: build, pack & publish
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        projects: [
+          'Pillsgood.Rx.Extensions/Pillsgood.Rx.Extensions.csproj',
+          'Pillsgood.Rx.Extensions.Disposables/Pillsgood.Rx.Extensions.Disposables.csproj',
+          'Pillsgood.Rx.Extensions.ReactiveUI/Pillsgood.Rx.Extensions.ReactiveUI.csproj'
+        ]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -24,13 +31,13 @@ jobs:
       - name: Publish
         uses: alirezanet/publish-nuget@v3.0.4
         with:
-            PROJECT_FILE_PATH: Pillsgood.Rx.Extensions/Pillsgood.Rx.Extensions.csproj
-            VERSION_STATIC: ${{steps.version.outputs.version}}
-            TAG_COMMIT: true
-            TAG_FORMAT: v*
-            NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-            NUGET_SOURCE: https://api.nuget.org
-            INCLUDE_SYMBOLS: false
+          PROJECT_FILE_PATH: Pillsgood.Rx.Extensions/Pillsgood.Rx.Extensions.csproj
+          VERSION_STATIC: ${{steps.version.outputs.version}}
+          TAG_COMMIT: true
+          TAG_FORMAT: v*
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          NUGET_SOURCE: https://api.nuget.org
+          INCLUDE_SYMBOLS: false
             
             
             

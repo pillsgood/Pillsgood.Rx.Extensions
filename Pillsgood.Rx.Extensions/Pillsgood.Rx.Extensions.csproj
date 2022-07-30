@@ -1,9 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">    
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <MinVerTagPrefix>v</MinVerTagPrefix>
+        <Configurations>Debug;Release;ReactiveUI</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <Target Name="AddPackageSpecificConstants" BeforeTargets="BeforeCompile">
@@ -13,26 +15,26 @@
     </Target>
 
     <ItemGroup>
-      <PackageReference Include="MinVer" Version="4.1.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="System.Reactive" Version="5.0.0" />
+        <PackageReference Include="MinVer" Version="4.1.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="System.Reactive" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Mixins\ObservableVariadicTemplates.tt">
-        <Generator>TextTemplatingFileGenerator</Generator>
-        <LastGenOutput>ObservableVariadicTemplates.cs</LastGenOutput>
-      </None>
+        <None Update="Mixins\ObservableVariadicTemplates.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>ObservableVariadicTemplates.cs</LastGenOutput>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Mixins\ObservableVariadicTemplates.cs">
-        <AutoGen>True</AutoGen>
-        <DesignTime>True</DesignTime>
-        <DependentUpon>ObservableVariadicTemplates.tt</DependentUpon>
-      </Compile>
+        <Compile Update="Mixins\ObservableVariadicTemplates.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>ObservableVariadicTemplates.tt</DependentUpon>
+        </Compile>
     </ItemGroup>
 
 </Project>
