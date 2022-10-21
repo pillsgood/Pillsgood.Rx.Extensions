@@ -15,10 +15,23 @@ public static class DisposableMixins
     }
 #endif
 
+    public static async ValueTask<T> DisposeWithAsync<T>(this T item, CompositeAsyncDisposable compositeDisposable)
+        where T : IAsyncDisposable
+    {
+        ArgumentNullException.ThrowIfNull(compositeDisposable);
+        await compositeDisposable.AddAsync(item);
+        return item;
+    }
 
     public static T DisposeWith<T>(this T disposable, IDisposableWith with)
         where T : IDisposable
     {
         return disposable.DisposeWith(with.CompositeDisposable);
+    }
+
+    public static ValueTask<T> DisposeWithAsync<T>(this T disposable, IAsyncDisposableWith with)
+        where T : IAsyncDisposable
+    {
+        return disposable.DisposeWithAsync(with.CompositeAsyncDisposable);
     }
 }

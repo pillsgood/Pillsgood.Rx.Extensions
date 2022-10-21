@@ -6,3 +6,8 @@ public interface IDisposableWith : IDisposable
 {
     CompositeDisposable CompositeDisposable { get; }
 }
+
+public interface IAsyncDisposableWith : IAsyncDisposable
+{
+    CompositeAsyncDisposable CompositeAsyncDisposable { get; }
+}
