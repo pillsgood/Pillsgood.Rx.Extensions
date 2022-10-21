@@ -12,7 +12,6 @@ jobs:
       matrix:
         projects:
           - 'Pillsgood.Rx.Extensions/Pillsgood.Rx.Extensions.csproj'
-          - 'Pillsgood.Rx.Extensions.Disposables/Pillsgood.Rx.Extensions.Disposables.csproj'
           - 'Pillsgood.Rx.Extensions.ReactiveUI/Pillsgood.Rx.Extensions.ReactiveUI.csproj'
     steps:
       - uses: actions/checkout@v3

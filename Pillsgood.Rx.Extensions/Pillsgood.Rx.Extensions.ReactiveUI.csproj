@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <Import Condition=" 'true' " Project="Pillsgood.Rx.Extensions.csproj" />
+    <PropertyGroup>
+        <DefineConstants>REACTIVE_UI</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="ReactiveUI" Version="18.3.1" />
+    </ItemGroup>
+</Project>
